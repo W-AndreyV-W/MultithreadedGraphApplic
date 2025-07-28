@@ -12,6 +12,7 @@ PoolThread::PoolThread(QObject* parent, unsigned int stopTime)
 PoolThread::~PoolThread(){
 
     delete mutex;
+    delete _stopTime;
 }
 
 void PoolThread::setTime(unsigned int time){

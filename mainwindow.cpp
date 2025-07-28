@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow(){
 
     delete ui;
+    delete poolThread;
 }
 
 void MainWindow::workerThread(unsigned int numberThread, int iter){
