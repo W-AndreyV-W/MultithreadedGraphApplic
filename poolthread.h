@@ -25,10 +25,13 @@ signals:
 public slots:
 
     void workerThread(unsigned int numberThread, int iter);
+    void poolFinish();
 
 private:
 
     QMutex* mutex = nullptr;
+
+    int i = 0;
 
     unsigned int* _stopTime = nullptr;
     QVector<WorkerThread*> treads;

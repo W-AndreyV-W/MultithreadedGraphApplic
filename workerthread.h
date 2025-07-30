@@ -15,8 +15,6 @@ public:
                           unsigned int number);
     ~WorkerThread();
 
-    void setSettings();
-
 signals:
 
     void sig_worket(unsigned int numberThread, int iter);

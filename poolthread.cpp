@@ -4,9 +4,9 @@ PoolThread::PoolThread(QObject* parent, unsigned int stopTime)
                      : QObject{parent}{
 
     mutex = new QMutex;
-    treads.resize(10);
     _stopTime = new unsigned int;
     *_stopTime = stopTime;
+    treads.resize(10);
 }
 
 PoolThread::~PoolThread(){
@@ -24,22 +24,27 @@ void PoolThread::setTime(unsigned int time){
     mutex->unlock();
 }
 
-void PoolThread::workerThread(unsigned int numberThread, int iter){
+void PoolThread::workerThread(unsigned int numberThread, int iter) {
 
     emit sig_workerThread(numberThread, iter);
 }
 
+void PoolThread::poolFinish() {
+
+    i--;
+}
+
 void PoolThread::pool(){
 
-    for (int i = 0; i < 10; i++){
+    if (i==0) {
 
-        mutex->lock();
+        for (; i < 10; i++) {
 
-        treads[i] = new WorkerThread(this, mutex, _stopTime, i + 1);
-        connect(treads[i], &WorkerThread::sig_worket, this, &PoolThread::workerThread);
-        connect(treads[i], &WorkerThread::finished, treads[i], &QObject::deleteLater);
-        treads[i]->start();
-
-        mutex->unlock();
+            treads[i] = new WorkerThread(this, mutex, _stopTime, i);
+            connect(treads[i], &WorkerThread::sig_worket, this, &PoolThread::workerThread);
+            connect(treads[i], &WorkerThread::finished, treads[i], &QObject::deleteLater);
+            connect(treads[i], &WorkerThread::finished, this, &PoolThread::poolFinish);
+            treads[i]->start();
+        }
     }
 }

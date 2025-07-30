@@ -22,34 +22,34 @@ void MainWindow::workerThread(unsigned int numberThread, int iter){
 
     switch (numberThread) {
 
-        case 1:
+        case 0:
             ui->progressBar_1->setValue(iter);
             break;
-        case 2:
+        case 1:
             ui->progressBar_2->setValue(iter);
             break;
-        case 3:
+        case 2:
             ui->progressBar_3->setValue(iter);
             break;
-        case 4:
+        case 3:
             ui->progressBar_4->setValue(iter);
             break;
-        case 5:
+        case 4:
             ui->progressBar_5->setValue(iter);
             break;
-        case 6:
+        case 5:
             ui->progressBar_6->setValue(iter);
             break;
-        case 7:
+        case 6:
             ui->progressBar_7->setValue(iter);
             break;
-        case 8:
+        case 7:
             ui->progressBar_8->setValue(iter);
             break;
-        case 9:
+        case 8:
             ui->progressBar_9->setValue(iter);
             break;
-        case 10:
+        case 9:
             ui->progressBar_10->setValue(iter);
             break;
         default:
@@ -69,5 +69,6 @@ void MainWindow::on_horizontalSlider_valueChanged(int value) {
 
 void MainWindow::on_pushButton_2_clicked() {
 
+    poolThread->setTime(ui->horizontalSlider->value() * 1000);
     poolThread->pool();
 }

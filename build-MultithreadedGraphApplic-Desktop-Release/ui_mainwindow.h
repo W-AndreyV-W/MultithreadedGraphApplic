@@ -9,6 +9,7 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
+#include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -111,9 +112,10 @@ public:
 
         horizontalSlider = new QSlider(gridLayoutWidget);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setLocale(QLocale(QLocale::Cherokee, QLocale::UnitedStates));
         horizontalSlider->setMinimum(1);
         horizontalSlider->setMaximum(100);
-        horizontalSlider->setValue(40);
+        horizontalSlider->setValue(80);
         horizontalSlider->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(horizontalSlider, 1, 0, 1, 1);
